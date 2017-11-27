@@ -3,10 +3,9 @@
 We Are Implementing a Homomorphic Encryption Algorithm that can be used for secure searching over keywords.
 our goals are:
 <li>Optimizing the encryption algorithm</li>
-<li>Optimizing  indexing</li>
 <li>Add a caching mechanism</li>
 <li>Change algorithm so it can support parallel processing</li>
-<li>See if we can use hash index to improve performance</li>
+<li>See if we can implement hash index to improve performance</li>
 
 <H1>Bugs</H1>
 <hr>
