@@ -6,6 +6,7 @@ our goals are:
 <li>Optimizing  indexing</li>
 <li>Add a caching mechanism</li>
 <li>Change algorithm so it can support parallel processing</li>
+<li>See if we can use hash index to improve performance</li>
 
 <H1>Bugs</H1>
 <hr>
