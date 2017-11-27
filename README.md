@@ -9,4 +9,4 @@ our goals are:
 
 <H1>Bugs</H1>
 <hr>
-Please report any bugs that you find here. Or, even better, fork the repository on GitHub and create a pull request (PR). We welcome all changes, big or small, and we will help you make the PR if you are new to git (just ask on the issue and/or see CONTRIBUTING.rst).
+Please report any bugs that you find <a href="https://github.com/A-AR-R/ADB-Project/issues">here</a>. Or, even better, fork the repository on GitHub and create a pull request (PR). We welcome all changes, big or small, and we will help you make the PR if you are new to git (just ask on the issue and/or see CONTRIBUTING.rst).
