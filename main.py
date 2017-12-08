@@ -59,129 +59,140 @@
 # import time
 
 
-import datetime
-from random import randrange
-
-
-# def encrypt(text):
-#     random.seed(datetime.datetime.now())
-#     l=len(text)
-#     s0= random.getrandbits(6*8)
-#     s0_s = integer2string(s0)
-#     print "random seed is :",s0
-#     l0=string2integer(text[:6])
-#     print "left part of string is :",l0
-#     r0=string2integer(text[6:])
-#     print "right part of string is :",r0
-#     cl=s0^l0
-#     print "left part of encryption is : ",cl
+# import datetime
+# from random import randrange
 #
-#     _key=[]
 #
-#     random.seed(cl)
-#     for i in range(4):
-#         _key.append(random.randint(i,len(integer2string(r0))-1))
-#     print "permution key is : ",_key
-#     list_s0_s=split_string(integer2string(s0))
-#     # print p_key
-#     cr=sattoloCycle(list_s0_s,_key)
-#     cr="".join(cr)
-#     cr=string2integer(cr)
-#     print "right part of encryptio is :",cr
-#     return cl,cr
-# def validate(enc1,enc2):
-#     print "--------"
-#     clXorCr=enc1[0]^enc2[0]
-#     print "sio xor siq is :",clXorCr
-#     print "fkio(si0)XORfkiq is :", enc1[1]^enc2[1]
-#     random.seed(enc1[0]^enc2[0])
-#     _key=[]
-#     for i in range(4):
-#         _key.append(random.randint(i,6))
-#     print "permution key is : ",_key
-#     list_cl=split_string(integer2string(enc1[0]^enc2[0]))
-#     cr=sattoloCycle(list_cl,_key)
-#     cr="".join(cr)
-#     cr=string2integer(cr)
-#     print "fkioxorfkiq(sioXorsiq)XOR is :", cr
-# e1=encrypt(p)
-# print e1
-# time.sleep(1)
-# e2=encrypt(p)
-# print e2
-# validate(e1,e2)
+# # def encrypt(text):
+# #     random.seed(datetime.datetime.now())
+# #     l=len(text)
+# #     s0= random.getrandbits(6*8)
+# #     s0_s = integer2string(s0)
+# #     print "random seed is :",s0
+# #     l0=string2integer(text[:6])
+# #     print "left part of string is :",l0
+# #     r0=string2integer(text[6:])
+# #     print "right part of string is :",r0
+# #     cl=s0^l0
+# #     print "left part of encryption is : ",cl
+# #
+# #     _key=[]
+# #
+# #     random.seed(cl)
+# #     for i in range(4):
+# #         _key.append(random.randint(i,len(integer2string(r0))-1))
+# #     print "permution key is : ",_key
+# #     list_s0_s=split_string(integer2string(s0))
+# #     # print p_key
+# #     cr=sattoloCycle(list_s0_s,_key)
+# #     cr="".join(cr)
+# #     cr=string2integer(cr)
+# #     print "right part of encryptio is :",cr
+# #     return cl,cr
+# # def validate(enc1,enc2):
+# #     print "--------"
+# #     clXorCr=enc1[0]^enc2[0]
+# #     print "sio xor siq is :",clXorCr
+# #     print "fkio(si0)XORfkiq is :", enc1[1]^enc2[1]
+# #     random.seed(enc1[0]^enc2[0])
+# #     _key=[]
+# #     for i in range(4):
+# #         _key.append(random.randint(i,6))
+# #     print "permution key is : ",_key
+# #     list_cl=split_string(integer2string(enc1[0]^enc2[0]))
+# #     cr=sattoloCycle(list_cl,_key)
+# #     cr="".join(cr)
+# #     cr=string2integer(cr)
+# #     print "fkioxorfkiq(sioXorsiq)XOR is :", cr
+# # e1=encrypt(p)
+# # print e1
+# # time.sleep(1)
+# # e2=encrypt(p)
+# # print e2
+# # validate(e1,e2)
 import time
 from HomomorphicAlgorithm import HomomorphicEncryption,ValidateHomomorphicEncryption
 from datetime import datetime
-h=HomomorphicEncryption()
-h.set_text("advanced_database",datetime.now())
-print "---------------"
-sio=h.get_sio(0)
-print "sio is :",sio
-cioL=h.get_cioL()
-print "cioL is :",cioL
-_key=h.generate_homomorphic_key()
-print "homomorphic key is :",_key
-pad=h.get_fkio()
-cioR=h.get_cioR()
-print "cioR is :",cioR
-time.sleep(1)
-h2=HomomorphicEncryption()
-h2.set_text("advanced_database",datetime.now())
-print "---------------"
-sio2=h2.get_sio(0)
-print "sio is :",sio2
-cioL2=h2.get_cioL()
-print "cioL is :",cioL2
-_key2=h2.generate_homomorphic_key()
-print "homomorphic key is :",_key2
-h2.get_fkio()
-cioR2=h2.get_cioR()
-print "cioR is :",cioR
-print "---------------"
-
-v=ValidateHomomorphicEncryption((cioL,cioR),(cioL2,cioR2))
-v.XorFirstHalves()
-v.GenerateHomomorphicKey()
-if v.XorSecondHalves()==v.CalulateSecondHalvesWithHomomorphicFeature():
-    print "matched"
-else:
-    print "didnt match"
+import random
+import string
+import hashlib
+from storage import Storage
+s=Storage()
 
 
-print "**************************************"
+keywords=open("keywords","rb").read().split(",")
 
-h3=HomomorphicEncryption()
-h3.set_text("advanced_database",datetime.now())
-print "---------------"
-sio3=h3.get_sio(0)
-print "sio is :",sio3
-cioL3=h3.get_cioL()
-print "cioL is :",cioL3
-_key3=h3.generate_homomorphic_key()
-print "homomorphic key is :",_key3
-pad3=h3.get_fkio()
-cioR3=h3.get_cioR()
-print "cioR is :",cioR3
-time.sleep(1)
-h4=HomomorphicEncryption()
-h4.set_text("database_advanced",datetime.now())
-print "---------------"
-sio4=h4.get_sio(0)
-print "sio is :",sio4
-cioL4=h4.get_cioL()
-print "cioL is :",cioL4
-_key4=h4.generate_homomorphic_key()
-print "homomorphic key is :",_key4
-h4.get_fkio()
-cioR4=h4.get_cioR()
-print "cioR is :",cioR4
-print "---------------"
+# for i in range(100000):
+#     print i
+#     keyword=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(14))
+#     h=HomomorphicEncryption()
+#     h.set_text(keyword,datetime.now())
+#     sio=h.get_sio()
+#     cioL=h.get_cioL()
+#     _key=h.generate_key()
+#     pad=h.get_fkio()
+#     cioR=h.get_cioR()
+#     s.set_new_keyword(_key,cioL,cioR)
+#     keywords.append(keyword)
+for keyword in keywords:
+    h2=HomomorphicEncryption()
+    h2.set_text(keyword.strip()[1:-1],datetime.now())
+    sio2=h2.get_sio_2()
+    cioL=h2.get_cioL()
+    pad2=h2.get_fkio()
+    cioR=h2.get_cioR()
 
-v=ValidateHomomorphicEncryption((cioL3,cioR3),(cioL4,cioR4))
-v.XorFirstHalves()
-v.GenerateHomomorphicKey()
-if v.XorSecondHalves()==v.CalulateSecondHalvesWithHomomorphicFeature():
-    print "matched"
-else:
-    print "didnt match"
+    for cipher in s.keywords:
+        v=ValidateHomomorphicEncryption(cipher[0],(cioL,cioR),(cipher[1],cipher[2]))
+        v.XorFirstHalves()
+        if v.XorSecondHalves()==v.CalulateSecondHalvesWithHomomorphicFeature():
+            print keyword.strip()[1:-1],cipher[0].encode("hex")
+            print "matched"
+            break
+        else:
+            pass
+            # print "didnt match"
+#
+#
+# print "**************************************"
+#
+# h3=HomomorphicEncryption()
+# h3.set_text("advanced_database",datetime.now())
+# print "---------------"
+# sio3=h3.get_sio(0)
+# print "sio is :",sio3
+# cioL3=h3.get_cioL()
+# print "cioL is :",cioL3
+# _key3=h3.generate_homomorphic_key()
+# print "homomorphic key is :",_key3
+# pad3=h3.get_fkio()
+# cioR3=h3.get_cioR()
+# print "cioR is :",cioR3
+#
+# time.sleep(1)
+# h4=HomomorphicEncryption()
+# h4.set_text("advanced_database",datetime.now())
+# print "---------------"
+# sio4=h4.get_sio(0)
+# print "sio is :",sio4
+# cioL4=h4.get_cioL()
+# print "cioL is :",cioL4
+# _key4=h4.generate_homomorphic_key()
+# print "homomorphic key is :",_key4
+# h4.get_fkio()
+# cioR4=h4.get_cioR()
+# print "cioR is :",cioR4
+# print "---------------"
+#
+# v=ValidateHomomorphicEncryption((cioL3,cioR3),(cioL4,cioR4))
+# v.XorFirstHalves()
+# v.GenerateHomomorphicKey()
+# if v.XorSecondHalves()==v.CalulateSecondHalvesWithHomomorphicFeature():
+#     print "matched"
+# else:
+#     print "didnt match"
+#
+# import hashlib
+# from storage import Storage
+# s=Storage()
+# s.set_new_keyword()
